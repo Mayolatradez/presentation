@@ -1,0 +1,261 @@
+<head>
+
+
+<link href="https://fonts.googleapis.com/css?family=Archivo:700|Roboto:500&display=swap" rel="stylesheet">
+<link   rel="stylesheet" media="all" href = "css/styles.css">
+  <script src="https://unpkg.com/three"></script>
+  <script src="https://unpkg.com/three-spritetext"></script>
+  <script src="https://unpkg.com/3d-force-graph"></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src='https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js' charset="utf-8"></script>
+</head>
+<body>
+    
+    <div 
+    id="particles-js" style="z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0; right: 0; bottom: 0;"></div>
+    <div id="3d-graph"></div>
+
+    <script>
+      particlesJS.load('particles-js', `https://raw.githubusercontent.com/Mayolatradez/ADS3/master/particles.json`, function() {
+        console.log('callback - particles.js config loaded');
+      });
+    </script>
+
+    <script>
+      const data = {
+        nodes: [
+       /** Environmental Violence */
+          { id: "Domestic & Commercial", 
+          text:"Domestic and Commercial zones in cities are the largest contributor of microfibres. Every working washing machine in the home and in businesses like professional laundramats and hospitality run almost daily producing about 6 million fibres or 5g per wash. If 500 000 fleece jackets washed equate to 30kg of microfibres",
+          img: '../ADS3/Images/DOMESTIC-&-COMMERCIAL', group: 0},
+          
+          { id: "Nile River",
+          text:"This river holds historical importance and is the life line of Egypt. Running across the State it carries water used in domestic and commercial settings,\ 85% - Agricultural \ 12% - Agricultural \ 3% - Agricultural",
+          img:'../ADS3/Images/NILE', group: 0},
+          
+          { id: "Nile Delta",
+          img:'../ADS3/Images/NILE', group: 0},
+          
+          { id: "Mediterranean Sea", 
+          text:"The Medditerranean Sea has one of the highest concetrations of microfibres recorded. Off the coast Egypt, the particle count goes up to 1 million parts per square kilometer. This is has an impact on the marine fauna. The Fiber count is attributed to the waste water outfall into rivers that ultimately makes into the Sea" ,
+          img:'../ADS3/Images/MEDITERRANEAN.png',group: 0},
+          
+          { id: "Microbial Colonies", 
+          text:"Microbial Colonies metabolise with microfibers due to them being carbon based polymers. Whilst there are species of microbial oragnisms like Psuedomonas that fully metabolise and breakdown fibres most fibres dont break down fast enough before they are consumed by marine life. ", 
+          img:'../ADS3/Images/MICROBIAL-COLONIES', group: 0},
+          
+          { id: "Microfibres", 
+          text:"Little attention has gone into understanding the fate and effects of microfibres which are mostly shed from synthetic textiles during production and washing. Polyethylene terephthalate a thermoplastic polymer resin used in all artificial textiles, like polyester and nylon are not biodegradable. Textiles is the second largest pollutant and Microfibres, a product of the apparel industry, has recently come to the forefront of the ocean pollution discourse and we are yet to uncover the violence it holds. When these fibres enter our water ways they harbour contaminants, metabolise microbial life and drift only to be consumed by bottom feeders which stifle their growth which ultimately affects the food chain.", 
+          img:'../ADS3/Images/MICROFIBRES',group: 0},
+          
+          { id: "River Sediment",  
+          text:"Abbrasive degredation happens when microfibres end up on river sediment. Because it is a physically breaking it down it merely breaks down further into nanofibres this modifies the soil properties which",
+          img:'', group: 0},
+          
+          { id: "MicroFauna", 
+          text: "Microscopic life are the first to be impacted by microfibres. Marine life like plankton consume microfibres which stunt their growth, this is due to the fibres taking up space in their digestive system, this micro effect has a macro effect up the foodchain like inherent contaminants and low yeild",
+          img:'../ADS3/Images/MICROFAUNA', group: 0},
+          
+          { id: "MacroFauna",
+          text:"Marine life humans consume and other marine life. their diet consists largely of microfauna which is likely carrying microfibres. Larger microfibre speciments can cause internal infections by physically damaging organs and/or leach contaminants. The Red Mullet is a popular fish in the meditarrean which is bottom ",
+          img:'../ADS3/Images/MACROFAUNA', group: 0},
+          
+          { id: "MegaFauna", 
+          text: "Larger fish and mammals whos diets primarly consists of macrofauna are at threat, unlike for humans who may rely on fish farming to maintain a good yeild, macrofauna which is farmed may drop in population which may force these larger feeder to swim to further territories to find food affecting their natural feeding patterns",
+          img:'../ADS3/Images/MEGAFAUNA', group: 0},
+          
+          { id: "Aquaculture & Fisheries",
+          text:"Aquaculture is contained in control environments to ensure fish grow to the full size before going into the market, this doesn't negate the fact that microfibres that are potentially carring contaminants can pass through the fishing nets. Commercial fishing largely contain microfibres",
+          img:'../ADS3/Images/AQUACULTURE', group: 0},
+          
+          { id: "Coastal Shores",
+          text:"As microfibres move through river ultimately ending up at river deltas, current flows disrupt their tragetory. The fibres end up on coastal shores. 85% of human made material found on shores are microfibres and they alter the composition of the sand affecting its ability to retain heat. This has an effect on the hatching success on Egyptian Turtles",
+          img:'../ADS3/Images/COASTAL-SHORE', group: 0},
+          
+          { id: "Salt & Freshwater Marsh", 
+          text:"Marshes or Wetlands may carry higher anthropogenic pressure. IN Egypt the these wetlands are where crops like rice are grown and are primarily irragated using agricultural canals from the nile and sewage sludge a good and cheap fertiliser. Both carry high counts of microfibres and change the soil composition and affect microbial organisms that crops need to grow",
+          img:'', group: 0},
+          
+          { id: "Industrial Contaminants", 
+          text:"Microfibres are carbon based polymers that stick to other contaminants that may be found in the air or waterbodies. They harbour contaminants like PFAs efficiently due to their physical structure(being a thread) which have a large surface area to volume ratio meaning it can carry more contaminants than its own size.",
+          img:'../ADS3/Images/CONTAMINANTS', group: 0},
+          
+          { id: "Waste Water Plants", 
+          text:"these facilities carry the load on managing microfibres and do a bad job at that. The facilities primarily process water to return back in the system. Well equipped facilities operate on 80% efficiency which means they end up in sewage sludge and they remaining 20% returns to our drinking water or the facilities outfall ending up in rivers",
+          img:'../ADS3/Images/WASTE-WATER', group: 0},
+          
+          { id: "Industrial Factories", 
+          text:"Egypt's Industries include Textiles, Chemicals including fertilizer polymers and petrochemicals and Food. These industries are expell contaminants which end up in Nile",
+          img:'../ADS3/Images/CONTAMINANTS', group: 0},
+          
+          { id: "Textile Factories", 
+          text:"Egypt strategic location being the frontier between the east and west serves as a mitigator between the two territories. China's Belt & Road Initiate last check point is Egypt. Egypt opened its territory to international investment, by offering facilities, incentives and advantages to encourage and attract investors and capitals. This law permits investors have 100% ownership, guarantees against confiscation, sequestration and nationalisation, and lastly tax incentives (tax exemption over 5 years for projects in the Cairo area and 25 years for projects outside Cairo area). This introduced a large textile market into Egypt like Mankai Investment which acquired 30 square km in Sadat attracting 50+ Chinese firms",
+          img:'../ADS3/Images/TEXTILE FACTORY', group: 0},
+          
+          { id: "Domestic and Commercial Waste Water",
+          img:'../ADS3/Images/WASTE-WATER', group: 0},
+
+          { id: "Agricultural Canals", 
+          text:"For generations Egypt has relied on a sophisticated network of canals diverting water from the Nile which locals still use to irrigated their cultivated land and also supply water to villages and carry waste back into the Nile. Rural Egypt still primarily use these canals for water",
+          img:'../ADS3/Images/AGRICULTURAL-CANALS', group: 0},
+          
+          { id: "Sludge Fertilizer",
+          text:"Sludge collected from waste water facilities and is treated and recycled on to land as a fertiliser and to improve soil structure. Although it contains useful organic matter it can also be a source of disease or toxic amounts of micronutrients if used incorrectly.", 
+          img:'../ADS3/Images/SLUDGE FERTILIZER', group: 0},
+          
+          { id: "City Solid Waste Management", 
+          text:"Up to 40% of Egypt's generated waste is not operated by public or private institutions, but placed in streets, rivers, lakes, drainage channels or illegal dumping sites. Only an estimated 6% of the produced waste is collected, and only partly recycled. The improper disposal of solid waste pollutes air, water and soil, and compromises public and animal health.[9] Up until 2018, the Egyptian government had been giving little attention to solid waste management, public health and environmental protection.",
+          img:'../ADS3/Images/WASTE MANAGEMENT', group: 0},
+          
+          { id: "Zabbaleen", 
+          text:"For several generations, the Zabbaleen supported themselves by collecting trash door-to-door from the residents of Cairo for nearly no charge. Notably, the Zabbaleen recycle up to 80 percent of the waste that they collect, whereas most Western garbage collecting companies can only recycle 20 to 25 percent of the waste that they collect.",
+          img:'../ADS3/Images/ZABBALEEN', group: 1},
+          
+          { id: "International Consortiums",
+          text:"The government of Egypt sold annual contracts reaching US$50 million to international companies to collect Cairo's solid waste. The three companies that were awarded with contracts for cleaning Cairo are FCC and Urbaser, Enser (both Spanish companies), and AMA (an Italian) company. There was a precedent for this approach to trash collection two years earlier, in 2001, when the government agreed to sign a contract with Onyx, a French company, to manage the waste of Alexandria, the second largest city in Egypt. The government of Egypt also opened its territory to international investment, by offering facilities, incentives and advantages to encourage and attract investors and capitals.",
+          img:'../ADS3/Images/CONSORTIUM', group: 2},
+          
+          { id: "Suez Canal", 
+          Text: "The Suez Canal Economic Zone, sometimes shortened to the Suez Canal Zone, describes the set of locations neighbouring the canal where customs rates have been reduced to zero in order to attract investment. The zone comprises over 600 km2 within the governorates of Port Said, Ismailia and Suez. Projects in the zone are collectively described as the Suez Canal Area Development Project (SCADP). The plan focuses on development of East Port Said and the port of Ain Sokhna, and hopes to extend to four more ports at West Port Said, El-Adabiya, Arish and El Tor. China is investing US$5 billion in the region attracting in textiles, petrochemicals and plastic industry",
+          img:'../ADS3/Images/SUEZ-CANAL', group: 2},
+          
+          { id: "China Belt & Road Initiative", 
+          text:"China and Egypt is connected via Road route. Taking inspiration from the ancient Silk Road running from China to Europe, this scheme seeks to utilize the Silk Road Economic Belt and 21st-century Maritime Silk Road to foster connectivity and cooperation between China and the rest of Eurasia. By linking East Asia’s economic circle with the developed economies of Europe. China is partnering with 126 countries and 29 international organisations.",
+          img:'../ADS3/Images/BELT.png', group: 1 },
+
+          { id: "Ningxia Mankai Investments", 
+          text:"The China-Egypt Mankai Textile Park in Sadat City would potentially give Chinese companies a base from which to export clothes duty-free into the U.S. and EU, an attractive prospect given rising American tariffs on Chinese imports and increased domestic production costs.",
+          img:'', group: 1},
+          
+          { id: "Free Economic Zones",
+          text:"Are designate areas in which companies are taxed very lightly or not at all to encourage economic activity. Egypt has one the largest zones in the world inorder attract international investment which",
+          img:'../ADS3/Images/EGYPT', group: 1},
+         
+          { id: "Port Saied",
+          text:"Port Saied is being being further developed to carry the load of increased international business migrating to Egypt, Port Saied is in a Free Economic Zone and is the main port on the Suez Canal",
+          img:'../ADS3/Images/PORT SAIED', group: 2},
+         
+          { id: "Sadat City", 
+          text:"It is a first generation new urban community and one of the largest industrial cities in the country. Mankai Investments are developing a 3 sq.km textile park",
+          img:'../ADS3/Images/SADAT CITY',  group: 2},
+
+          { id: "Egypt",
+          img:'../ADS3/Images/EGYPT', group: 2},
+        ],
+        links: [
+          /** logic */
+          
+         /* { source: "Ningxia Mankai Investments", target: "Free Economic Zones", value: 1},
+          { source: "China Belt & Road Initiative", target: "Ningxia Mankai Investments", value: 1},
+          { source: "Free Economic Zones", target: "Suez Canal", value: 1},
+          { source: "Ningxia Mankai Investments", target: "Sadat City", value: 1},
+          { source: "China Belt & Road Initiative", target: "Free Economic Zones", value: 1},
+          { source: "Suez Canal", target: "Port Saied", value: 1},
+          { source: "Free Economic Zones", target: "Port Saied", value: 1},
+          { source: "International Consortiums", target: "China Belt & Road Initiative", value: 1},
+          { source: "International Consortiums", target: "Suez Canal", value: 1},
+          { source: "International Consortiums", target: "Ningxia Mankai Investments", value: 1},
+          { source: "City Solid Waste Management", target: "International Consortiums", value: 1},
+          { source: "Egypt", target: "Zabbaleen", value: 1},
+          { source: "Egypt", target: "Sadat City", value: 1},
+          { source: "Egypt", target: "Suez Canal", value: 1},
+          { source: "Egypt", target: "Port Saied", value: 1},
+          { source: "Egypt", target: "Free Economic Zones", value: 1},
+          { source: "Zabbaleen", target: "City Solid Waste Management", value: 5},
+          { source: "City Solid Waste Management", target: "Domestic and Commercial Waste Water", value: 1},
+          { source: "Domestic and Commercial Waste Water", target: "Agricultural Canals", value: 1},
+          { source: "Textile Factories", target: "Industrial Contaminants", value: 1},
+          { source: "Ningxia Mankai Investments", target: "Industrial Contaminants", value: 1},
+          { source: "Industrial Contaminants", target: "Waste Water Plants", value: 1},
+          { source: "Industrial Contaminants", target: "Nile River", value: 1},
+          { source: "Industrial Contaminants", target: "Waste Water Plants", value: 1},
+          { source: "Domestic and Commercial Waste Water", target: "Waste Water Plants", value: 1},
+          { source: "Waste Water Plants", target: "Sludge Fertilizer", value: 1},
+          { source: "Sludge Fertilizer", target: "Salt & Freshwater Marsh", value: 1},
+          { source: "Salt & Freshwater Marsh", target: "Nile Delta", value: 1},
+          { source: "Waste Water Plants", target: "Nile River", value: 1},
+          { source: "Nile River", target: "Nile Delta", value: 1},
+          { source: "Nile Delta", target: "Mediterranean Sea", value: 1},
+          { source: "Mediterranean Sea", target: "Suez Canal", value: 1},
+          { source: "Nile Delta", target: "Coastal Shores", value: 1},
+          { source: "Aquaculture & Fisheries", target: "Nile River", value: 1},
+          { source: "MegaFauna", target: "Aquaculture & Fisheries", value: 1},
+          { source: "MegaFauna", target: "Nile River", value: 1},
+          { source: "MacroFauna", target: "Nile River", value: 1},
+          { source: "MacroFauna", target: "MegaFauna", value: 1},
+          { source: "MicroFauna", target: "MacroFauna", value: 1},
+          { source: "River Sediment", target: "MicroFauna", value: 1},
+          { source: "River Sediment", target: "MicroFauna", value: 1},
+          { source: "Microfibres", target: "MicroFauna", value: 1},
+          { source: "Microfibres", target: "River Sediment", value: 1},
+          { source: "Microfibres", target: "Microbial Colonies", value: 1},
+          { source: "Microfibres", target: "Microbial Colonies", value: 1},
+          { source: "Microbial Colonies", target: "Microbial Colonies", value: 1},
+          { source: "Microfibres", target: "Coastal Shores", value: 1},
+          { source: "Aquaculture & Fisheries", target: "Domestic & Commercial", value: 1},
+          { source: "Domestic & Commercial", target: "Egypt" , value: 1},
+          { source: "Aquaculture & Fisheries", target: "Domestic & Commercial", value: 1},
+       */ ]
+      
+  
+  
+        
+    };
+  
+    
+      const Graph = ForceGraph3D()(document.getElementById("3d-graph"))
+        .graphData(data)
+        .backgroundColor('rgba(0,0,0,0)')
+        .nodeAutoColorBy("group")
+        .linkDirectionalParticles(4)
+        .linkDirectionalParticleSpeed(d => d.value * 0.01)
+        .linkCurvature(0)
+        .linkDirectionalParticleWidth(2)
+        .linkColor(() => 'rgb(255, 30, 215)')
+        .linkDirectionalParticleColor(() => 'rgb(255, 30, 215)')
+        .linkWidth(0.1)
+        .linkOpacity(0.4)
+        .onNodeDragEnd(node => {
+          // add specific node info to the panel
+          document.getElementById('panel_img').src = node.img;
+          document.getElementById('panel_title').innerHTML = node.id;
+          document.getElementById('panel_text').innerHTML = node.text;
+         
+      
+        })
+        .nodeThreeObject(node => {
+          // use a sphere as a drag handle
+          const obj = new THREE.Mesh(
+            new THREE.SphereGeometry(10),
+            new THREE.MeshBasicMaterial({
+              depthWrite: false,
+              transparent: true,
+              opacity: 0.1,
+              
+            })
+          );
+        
+          // add text sprite as child
+          const sprite = new SpriteText(node.id);
+          sprite.textfont = 'Roboto';
+          sprite.color = 'white';
+          sprite.textheight = 12;
+          
+          obj.add(sprite);
+          return obj;
+        });
+  
+      // Spread nodes a little wider
+      Graph.d3Force("charge").strength(-10000);
+      
+  
+    </script>
+    <div id="Archive" class="archive">
+    <img id="panel_img" src="" class="panel_img">
+    <h1 id="panel_title" class="panel_title"></h1>
+    <p id="panel_text" class="panel_text"></p>
+    </div>
+</body>

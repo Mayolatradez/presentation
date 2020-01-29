@@ -1,0 +1,38 @@
+
+
+body {
+	background: rgba(0,0,0,1);
+
+}
+
+.archive { 
+	height: 640px;
+	width: 560px;
+	position: absolute;
+	top: 50px;
+	right: 50px;
+	border-width: 20px;
+	
+}
+
+.panel_img {
+	width: 560px;
+	border-width: 20px;
+	
+}
+
+.panel_title {
+	font-family: 'Archivo', sans-serif;
+	font-style: normal;
+	font-weight: 100;
+	text-transform: uppercase;
+	color: #99195E;
+	background-color:BLACK; 
+}
+
+.panel_text {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 30;
+	color: #99195E;
+	background-color:BLACK; 
+}
